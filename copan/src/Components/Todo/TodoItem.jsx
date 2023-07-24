@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Button, Heading, Flex, Input } from "@chakra-ui/react";
+import { Button, Heading, Flex, Input, Checkbox } from "@chakra-ui/react";
+import { DeleteIcon } from "@chakra-ui/icons";
 
 const TodoItem = ({
   id,
@@ -34,7 +35,7 @@ const TodoItem = ({
       style={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "space-between",
       }}
     >
       {isEditing ? (
@@ -52,12 +53,12 @@ const TodoItem = ({
         </>
       ) : (
         <>
-          <Heading>
-            {title} {" ---> "}
-            {status ? "completed" : "Not completed"}
-          </Heading>
-          <Button onClick={() => handleToggle(id)}>Update Status</Button>
-          <Button onClick={() => handleDelete(id)}>Delete</Button>
+          <Checkbox isChecked={status} onChange={() => handleToggle(id)} />
+          <Heading> {title}</Heading>
+
+          <Button onClick={() => handleDelete(id)}>
+            <DeleteIcon />
+          </Button>
           <Button onClick={handleEditClick}>Edit</Button>
         </>
       )}

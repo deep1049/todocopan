@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AddTodo from "./AddTodo";
 import TodoItem from "./TodoItem";
-import { Box } from "@chakra-ui/react";
+import { Box, Card, Flex, Heading } from "@chakra-ui/react";
 
 const Todo = () => {
   const [todos, setTodos] = useState([]);
@@ -34,9 +34,18 @@ const Todo = () => {
     setTodos(updatedTodos);
     setEditingTodo({ id: null, title: "" }); // Reset the editing state
   };
+  const completedTasks = todos.filter((todo) => todo.status).length;
+  const totalTasks = todos.length;
   return (
-    <Box>
+    <Card maxW="lg" margin={"auto"} padding={"10px"}>
+      <Flex justifyContent={"space-between"}>
+        <Heading>Todo App</Heading>
+        <Heading>
+          {completedTasks}/{totalTasks}
+        </Heading>
+      </Flex>
       <AddTodo handleAddTodo={handleAddTodo} />
+
       <Box>
         {todos.map((todo) => (
           <TodoItem
@@ -52,7 +61,7 @@ const Todo = () => {
           />
         ))}
       </Box>
-    </Box>
+    </Card>
   );
 };
 
